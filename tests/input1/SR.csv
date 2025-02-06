@@ -1,0 +1,7 @@
+"name", "arrival time", "service time", "start time", "total wait time", "finish time", "turnaround time", "normalized turnaround"
+"A", 0, 3, 0, 0, 3, 3, 1.00
+"C", 4, 4, 4, 0, 8, 4, 1.00
+"E", 8, 2, 8, 0, 10, 2, 1.00
+"D", 6, 5, 12, 6, 17, 11, 2.20
+"B", 2, 6, 3, 12, 20, 18, 3.00
+7.60, 1.64

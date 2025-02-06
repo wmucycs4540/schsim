@@ -1,4 +1,4 @@
-# A5: CPU Scheduler Simulator
+# A2: CPU Scheduler Simulator
 
 You will write a program named `schsim` that simulates the CPU scheduler policies outlined in Chapter 9 of the _Operating Systems_ book. You will write this program in Zig.
 

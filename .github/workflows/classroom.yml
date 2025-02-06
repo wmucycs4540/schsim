@@ -1,0 +1,85 @@
+name: Autograding Tests
+'on':
+- push
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install Zig
+      uses: mlugg/setup-zig@v1
+      with:
+        version: 0.13.0
+    - name: Input 1 First Come First Serve
+      id: input1-ff
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: input1-ff
+        setup-command: ''
+        command: bash ./tests/input1/FF.test
+        timeout: 1
+        max-score: 1
+    - name: Input 1 Shortest Process Next
+      id: input1-sp
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: input1-sp
+        setup-command: ''
+        command: bash ./tests/input1/SP.test
+        timeout: 1
+        max-score: 1
+    - name: Input 1 Shortest Remaining Time
+      id: input1-sr
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: input1-sr
+        setup-command: ''
+        command: bash ./tests/input1/SR.test
+        timeout: 1
+        max-score: 1
+    - name: Input 1 Highest Response Ratio Next
+      id: input1-hr
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: input1-hr
+        setup-command: ''
+        command: bash ./tests/input1/HR.test
+        timeout: 1
+        max-score: 1
+    - name: Input 1 Round Robin Q1
+      id: input1-rrq1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: input1-rrq1
+        setup-command: ''
+        command: bash ./tests/input1/RR-q1.test
+        timeout: 1
+        max-score: 1
+    - name: Input 1 Round Robin Q4
+      id: input1-rrq4
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: input1-rrq4
+        setup-command: ''
+        command: bash ./tests/input1/RR-q4.test
+        timeout: 1
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        INPUT1-FF_RESULTS: "${{steps.input1-ff.outputs.result}}"
+        INPUT1-SP_RESULTS: "${{steps.input1-sp.outputs.result}}"
+        INPUT1-SR_RESULTS: "${{steps.input1-sr.outputs.result}}"
+        INPUT1-HR_RESULTS: "${{steps.input1-hr.outputs.result}}"
+        INPUT1-RRQ1_RESULTS: "${{steps.input1-rrq1.outputs.result}}"
+        INPUT1-RRQ4_RESULTS: "${{steps.input1-rrq4.outputs.result}}"
+      with:
+        runners: input1-ff,input1-sp,input1-sr,input1-hr,input1-rrq1,input1-rrq4

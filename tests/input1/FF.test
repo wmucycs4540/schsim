@@ -1,0 +1,41 @@
+echo "Running tests..."
+echo
+
+zig build install
+
+if [ $? -eq 0 ] ; then
+  echo "Pass: Program compiled successfully"
+else
+  echo "Fail: Program did not compile"
+  exit 1
+fi
+
+./zig-out/bin/schsim -v -s FF ./tests/input1/in.csv TESTOUT > STDOUT
+
+if [ $? -eq 0 ] ; then
+  echo "Pass: Program exited zero"
+  cat STDOUT
+else
+  echo "Fail: Program did not exit zero"
+  rm TESTOUT
+  exit 1
+fi
+
+diff TESTOUT ./tests/input1/FF.csv > DIFFOUT
+
+if [ $? -eq 0 ] ; then
+  echo "Pass: Output is correct"
+else
+  echo "Fail: Output is not correct"
+  cat DIFFOUT
+  rm TESTOUT
+  rm DIFFOUT
+  exit 1
+fi
+
+echo
+echo "All tests passed."
+
+rm TESTOUT
+rm DIFFOUT
+exit 0
