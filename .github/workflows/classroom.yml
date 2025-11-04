@@ -17,7 +17,7 @@ jobs:
     - name: Install Zig
       uses: mlugg/setup-zig@v1
       with:
-        version: 0.13.0
+        version: 0.15.2
     - name: Input 1 First Come First Serve
       id: input1-ff
       uses: classroom-resources/autograding-command-grader@v1
