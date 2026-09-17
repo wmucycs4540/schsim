@@ -20,7 +20,7 @@ jobs:
       with:
         test-name: input1-ff
         setup-command: ''
-        command: SCHSIM_BIN=./schsim-x86_64-linux bash ./tests/input1/FF.test
+        command: bash ./tests/input1/FF.test
         timeout: 1
         max-score: 1
     - name: Input 1 Shortest Process Next
@@ -29,7 +29,7 @@ jobs:
       with:
         test-name: input1-sp
         setup-command: ''
-        command: SCHSIM_BIN=./schsim-x86_64-linux bash ./tests/input1/SP.test
+        command: bash ./tests/input1/SP.test
         timeout: 1
         max-score: 1
     - name: Input 1 Shortest Remaining Time
@@ -38,7 +38,7 @@ jobs:
       with:
         test-name: input1-sr
         setup-command: ''
-        command: SCHSIM_BIN=./schsim-x86_64-linux bash ./tests/input1/SR.test
+        command: bash ./tests/input1/SR.test
         timeout: 1
         max-score: 1
     - name: Input 1 Highest Response Ratio Next
@@ -47,7 +47,7 @@ jobs:
       with:
         test-name: input1-hr
         setup-command: ''
-        command: SCHSIM_BIN=./schsim-x86_64-linux bash ./tests/input1/HR.test
+        command: bash ./tests/input1/HR.test
         timeout: 1
         max-score: 1
     - name: Input 1 Round Robin Q1
@@ -56,7 +56,7 @@ jobs:
       with:
         test-name: input1-rrq1
         setup-command: ''
-        command: SCHSIM_BIN=./schsim-x86_64-linux bash ./tests/input1/RR-q1.test
+        command: bash ./tests/input1/RR-q1.test
         timeout: 1
         max-score: 1
     - name: Input 1 Round Robin Q4
@@ -65,7 +65,7 @@ jobs:
       with:
         test-name: input1-rrq4
         setup-command: ''
-        command: SCHSIM_BIN=./schsim-x86_64-linux bash ./tests/input1/RR-q4.test
+        command: bash ./tests/input1/RR-q4.test
         timeout: 1
         max-score: 1
     - name: Autograding Reporter
