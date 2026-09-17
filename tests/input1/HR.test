@@ -2,4 +2,4 @@
 set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-"$script_dir/../run_scheduler_test.sh" "HR" "$script_dir/in.csv" "$script_dir/HR.csv"
+bash "$script_dir/../run_scheduler_test.sh" "HR" "$script_dir/in.csv" "$script_dir/HR.csv"

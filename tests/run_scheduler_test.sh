@@ -14,11 +14,10 @@ extra_args=("$@")
 
 runner_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-program_command="${PROGRAM:-}"
-program_bin="${SCHSIM_BIN:-}"
-if [ -z "$program_command" ] && [ -z "$program_bin" ]; then
+program_bin="${PROGRAM:-${SCHSIM_BIN:-}}"
+if [ -z "$program_bin" ]; then
   echo "No simulator configured." >&2
-  echo "Set PROGRAM (command string) or SCHSIM_BIN (executable path)." >&2
+  echo "Set PROGRAM or SCHSIM_BIN to an executable path." >&2
   exit 1
 fi
 
@@ -30,23 +29,16 @@ cleanup() {
 }
 trap cleanup EXIT
 
-if [ -n "$program_command" ]; then
-  sh -c "$program_command \"\$@\"" sh -v -s "$scheduler" "${extra_args[@]}" "$input_csv" "$tmp_out" >"$tmp_stdout" 2>&1 || {
-    echo "Fail: Program did not exit zero"
-    cat "$tmp_stdout"
-    exit 1
-  }
-else
-  if [ ! -x "$program_bin" ]; then
-    echo "Simulator is not executable: $program_bin" >&2
-    exit 1
-  fi
-  "$program_bin" -v -s "$scheduler" "${extra_args[@]}" "$input_csv" "$tmp_out" >"$tmp_stdout" 2>&1 || {
-    echo "Fail: Program did not exit zero"
-    cat "$tmp_stdout"
-    exit 1
-  }
+if [ ! -x "$program_bin" ]; then
+  echo "Simulator is not executable: $program_bin" >&2
+  exit 1
 fi
+
+"$program_bin" -v -s "$scheduler" "${extra_args[@]}" "$input_csv" "$tmp_out" >"$tmp_stdout" 2>&1 || {
+  echo "Fail: Program did not exit zero"
+  cat "$tmp_stdout"
+  exit 1
+}
 
 if ! diff "$tmp_out" "$expected_csv" >"$tmp_diff"; then
   echo "Fail: Output is not correct"

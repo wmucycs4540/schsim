@@ -44,9 +44,9 @@ Test scripts invoke your implementation with this contract:
 
 	<program> -v -s <scheduler> [optional scheduler args] <input_csv> <output_csv>
 
-Set `PROGRAM` to a POSIX-shell command string (for example an interpreter plus script), or `SCHSIM_BIN` to an executable path:
+Set `PROGRAM` or `SCHSIM_BIN` to an executable path:
 
-	PROGRAM="python3 ./solution.py" ./tests/input1/FF.test
+	PROGRAM=./my-schsim ./tests/input1/FF.test
 	SCHSIM_BIN=./my-schsim ./tests/input1/RR-q1.test
 
 If neither variable is set, tests fail.
@@ -54,7 +54,7 @@ If neither variable is set, tests fail.
 For GitHub autograding, set one of these in your workflow job environment so scripts can run your solution:
 
 	env:
-	  PROGRAM: "python3 ./solution.py"
+	  PROGRAM: "./my-schsim"
 
 or:
 
