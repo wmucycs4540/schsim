@@ -14,10 +14,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Install Zig
-      uses: mlugg/setup-zig@v2
-      with:
-        version: 0.15.2
     - name: Input 1 First Come First Serve
       id: input1-ff
       uses: classroom-resources/autograding-command-grader@v1
