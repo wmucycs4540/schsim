@@ -11,6 +11,9 @@ jobs:
   run-autograding-tests:
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
+    env:
+      PROGRAM: ${{ vars.PROGRAM }}
+      SCHSIM_BIN: ${{ vars.SCHSIM_BIN }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v4

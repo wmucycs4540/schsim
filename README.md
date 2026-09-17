@@ -51,7 +51,7 @@ Set `PROGRAM` or `SCHSIM_BIN` to an executable path:
 
 If neither variable is set, tests fail.
 
-For GitHub autograding, set one of these in your workflow job environment so scripts can run your solution:
+For GitHub autograding, set one of these in GitHub Actions variables (`PROGRAM` or `SCHSIM_BIN`) or directly in your workflow job environment so scripts can run your solution:
 
 	env:
 	  PROGRAM: "./my-schsim"
@@ -74,7 +74,7 @@ The output file will look similar to the input file, but will have added the pro
 
 ## Verbose Mode
 
-Your implementation must accept `-v` because the test harness invokes the simulator in verbose mode. The verbose output of the reference program is given below:
+The test harness invokes the simulator with `-v`. The verbose output of the reference program is given below:
 
     $ ./schsim -v -s FF ../examples/input1/in.csv FF.csv
         | A | B | C | D | E |
