@@ -1,6 +1,6 @@
 # A2: CPU Scheduler Simulator
 
-You will write a program named `schsim` that simulates the CPU scheduler policies outlined in Chapter 9 of the _Operating Systems_ book. You will write this program in Zig.
+You will write a program named `schsim` that simulates the CPU scheduler policies outlined in Chapter 9 of the _Operating Systems_ book. You may implement this program in any language.
 
 ## Input File Format
 
@@ -36,7 +36,30 @@ The program will accept a switch `-s` which selects which scheduler to simulate,
 
 	./schsim -s FF -q 2 input.csv output.csv
 
-If the optional time quantum is provided for a selected scheduler that doesn't require it, the program ignores that switch and runs normally. For the feedback scheduling policy, the quantum is only allowed to be 1 or 2 meaning *q = 1* and *q = 2* quantum values from the book, respectively.
+If the optional time quantum is provided for a selected scheduler that doesn't require it, the program ignores that switch and runs normally. For the feedback scheduling policy, the quantum is only allowed to be 1 or 2 meaning *q = 1* and *q = 2* quantum values from the book, respectively. This feedback-specific restriction does not apply to Round Robin; Round Robin test cases in this repository exercise `-q 1` and `-q 4`.
+
+## Running the tests
+
+Test scripts invoke your implementation with this contract:
+
+	<program> -v -s <scheduler> [optional scheduler args] <input_csv> <output_csv>
+
+Set `PROGRAM` or `SCHSIM_BIN` to an executable path:
+
+	PROGRAM=./my-schsim ./tests/input1/FF.test
+	SCHSIM_BIN=./my-schsim ./tests/input1/RR-q1.test
+
+If neither variable is set, tests fail.
+
+For GitHub autograding, set one of these in GitHub Actions variables (`PROGRAM` or `SCHSIM_BIN`) or directly in your workflow job environment so scripts can run your solution:
+
+	env:
+	  PROGRAM: "./my-schsim"
+
+or:
+
+	env:
+	  SCHSIM_BIN: "./my-schsim"
 
 ## Output File Format
 
@@ -51,7 +74,7 @@ The output file will look similar to the input file, but will have added the pro
 
 ## Verbose Mode
 
-It would be ideal for a verbose mode to be implemented that showed where each process was for each step in the simulation. The verbose output of the reference program is given below:
+The test harness invokes the simulator with `-v`. The verbose output of the reference program is given below:
 
     $ ./schsim -v -s FF ../examples/input1/in.csv FF.csv
         | A | B | C | D | E |
@@ -76,4 +99,3 @@ It would be ideal for a verbose mode to be implemented that showed where each pr
      18:                  # |
      19:                  # |
      20:                    |
-
