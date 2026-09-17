@@ -49,7 +49,17 @@ Set `PROGRAM` to a POSIX-shell command string (for example an interpreter plus s
 	PROGRAM="python3 ./solution.py" ./tests/input1/FF.test
 	SCHSIM_BIN=./my-schsim ./tests/input1/RR-q1.test
 
-If neither variable is set, tests fall back to the bundled Linux reference executable when available.
+If neither variable is set, tests fail.
+
+For GitHub autograding, set one of these in your workflow job environment so scripts can run your solution:
+
+	env:
+	  PROGRAM: "python3 ./solution.py"
+
+or:
+
+	env:
+	  SCHSIM_BIN: "./my-schsim"
 
 ## Output File Format
 

@@ -13,14 +13,9 @@ shift 3
 extra_args=("$@")
 
 runner_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(cd "$runner_dir/.." && pwd)"
 
 program_command="${PROGRAM:-}"
 program_bin="${SCHSIM_BIN:-}"
-if [ -z "$program_command" ] && [ -z "$program_bin" ] && [ -x "$repo_root/schsim-x86_64-linux" ]; then
-  program_bin="$repo_root/schsim-x86_64-linux"
-  echo "Using bundled Linux reference executable fallback: $program_bin" >&2
-fi
 if [ -z "$program_command" ] && [ -z "$program_bin" ]; then
   echo "No simulator configured." >&2
   echo "Set PROGRAM (command string) or SCHSIM_BIN (executable path)." >&2
