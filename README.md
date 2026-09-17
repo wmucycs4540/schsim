@@ -44,7 +44,7 @@ Test scripts invoke your implementation with this contract:
 
 	<program> -v -s <scheduler> [optional scheduler args] <input_csv> <output_csv>
 
-Set `PROGRAM` (full command) or `SCHSIM_BIN` (executable path) to run tests with your implementation:
+Set `PROGRAM` (command string with shell-style quoting for arguments) or `SCHSIM_BIN` (executable path) to run tests with your implementation:
 
 	PROGRAM="python3 ./solution.py" ./tests/input1/FF.test
 	SCHSIM_BIN=./my-schsim ./tests/input1/RR-q1.test
